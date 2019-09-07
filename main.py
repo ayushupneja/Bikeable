@@ -23,7 +23,7 @@ app = Flask(__name__)
 
 @app.route('/')
 def index():
-    return testindex.html
+    return render_template(testindex.html)
 
 
 if __name__ == '__main__':
