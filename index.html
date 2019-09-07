@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang='en'>
   <head>
-    <title>Searchable Map Template Demo</title>
+    <title>Bikeable</title>
     <meta charset='utf-8' />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <meta content='' name='description' />
@@ -23,7 +23,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class='navbar-brand' href='index.html'>Searchable Map Template</a>
+          <a class='navbar-brand' href='index.html'>Bikeable</a>
         </div>
         <div class="navbar-collapse collapse">
           <ul class="nav navbar-nav navbar-right">
@@ -36,10 +36,10 @@
     <div class='container-fluid'>
       <div class='row'>
         <div class='col-md-4'>
-          <p>This is a demo of <a href='http://derekeder.com'>Derek Eder's</a> <a href='http://derekeder.com/searchable_map_template/'>Searchable Map Template</a> using Google <a href='http://support.google.com/fusiontables/answer/2571232?hl=en&ref_topic=1652595'>Fusion Tables</a>. Use this section to give a little context to your map.</p>
+          <p><b>Find the fastest, safest route for you!</b></p>
           <div class='well'>
             <h4>
-              Address <small>(<a id='find_me' href='#'>find me</a>)</small>
+              Origin <small>(<a id='find_me' href='#'>find me</a>)</small>
             </h4>
             <p>
               <input class='form-control' id='search_address' placeholder='Enter an address or an intersection' type='text' />
@@ -57,25 +57,23 @@
             </p>
 
             <br />
-            <h4>Custom filters and views</h4>
-            <p>Take a look at the <a href='https://github.com/derekeder/FusionTable-Map-Template/wiki/Filter-examples'>wiki</a> to see how to add your own custom filters and views like:</p>
-            <div class='row'>
-              <div class='col-md-6'>
-                <ul>
-                  <li><a href='https://github.com/derekeder/FusionTable-Map-Template/wiki/Filter-examples#wiki-checkboxes'>Checkboxes</a></li>
-                  <li><a href='https://github.com/derekeder/FusionTable-Map-Template/wiki/Filter-examples#wiki-radiobuttons'>Radio buttons</a></li>
-                  <li><a href='https://github.com/derekeder/FusionTable-Map-Template/wiki/Filter-examples#wiki-drop-down-lists'>Drop down lists</a></li>
-                  <li><a href='https://github.com/derekeder/FusionTable-Map-Template/wiki/Filter-examples#wiki-textsearches'>Text searches</a></li>
-                </ul>
-              </div>
-              <div class='col-md-6'>
-                <ul>
-                  <li><a href='https://github.com/derekeder/FusionTable-Map-Template/wiki/Filter-examples#wiki-sliders'>Sliders</a></li>
-                  <li><a href='https://github.com/derekeder/FusionTable-Map-Template/wiki/Filter-examples#wiki-date-sliders'>Date sliders</a></li>
-                  <li><a href='https://github.com/derekeder/FusionTable-Map-Template/wiki/List-search-results'>Results lists</a></li>
-                </ul>
-              </div>
-            </div>
+            <h4>
+              Destination
+            </h4>
+            <p>
+              <input class='form-control' id='search_address' placeholder='Enter an address or an intersection' type='text' />
+            </p>
+            <p>
+              <label>
+                within
+                <select id='search_radius'>
+                  <option value='400'>2 blocks</option>
+                  <option value='805'>1/2 mile</option>
+                  <option value='1610'>1 mile</option>
+                  <option value='3220'>2 miles</option>
+                </select>
+              </label>
+            </p>
             <br />
             <a class='btn btn-primary' id='search' href='#'>
               <i class='glyphicon glyphicon-search'></i>
@@ -113,10 +111,10 @@
         $(window).resize(function () {
           var h = $(window).height(),
             offsetTop = 105; // Calculate the top offset
-        
+
           $('#map_canvas').css('height', (h - offsetTop));
         }).resize();
-        
+
         $(function() {
           var myMap = new MapsLib({
             fusionTableId:      "1m4Ez9xyTGfY2CU6O-UgEcPzlS0rnzLU93e4Faa0",
@@ -127,7 +125,7 @@
           });
 
           var autocomplete = new google.maps.places.Autocomplete(document.getElementById('search_address'));
-      
+
           $(':checkbox').click(function(){
             myMap.doSearch();
           });
@@ -135,25 +133,25 @@
           $(':radio').click(function(){
             myMap.doSearch();
           });
-          
+
           $('#search_radius').change(function(){
             myMap.doSearch();
           });
-          
+
           $('#search').click(function(){
             myMap.doSearch();
           });
-          
+
           $('#find_me').click(function(){
-            myMap.findMe(); 
+            myMap.findMe();
             return false;
           });
-          
+
           $('#reset').click(function(){
-            myMap.reset(); 
+            myMap.reset();
             return false;
           });
-          
+
           $(":text").keydown(function(e){
               var key =  e.keyCode ? e.keyCode : e.which;
               if(key === 13) {
