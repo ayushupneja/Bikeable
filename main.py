@@ -30,7 +30,7 @@ GEOCODING_KEY = AIzaSyAjYIJDSpRo90YUDZNtLnSCTmuMHfLMAlo
 @app.route('/')
 def index():
     return render_template('index.html')
-
+'''
 @app.route('/routing/')
 def routing():
     origin = request.args.get('origin')
@@ -62,6 +62,7 @@ def routing():
 
     else:
         print("<h3>GET request missing either origin or destination or has improper coordinate formatting<h3>")
+'''
 
 
 if __name__ == '__main__':
