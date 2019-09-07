@@ -9,12 +9,16 @@
     <link rel="icon" href="images/favicon.png">
     <link rel="stylesheet" href="css/bootstrap.min.css"/>
     <link rel="stylesheet" href="css/custom.css"/>
+    <script type="text/javascript" src='../test-credentials.js'></script>
+<script type="text/javascript" src="https://js.api.here.com/v3/3.1/mapsjs-core.js"></script>
+<script type="text/javascript" src="https://js.api.here.com/v3/3.1/mapsjs-service.js"></script>
+<script type="text/javascript" src="https://js.api.here.com/v3/3.1/mapsjs-ui.js"></script>
+<script type="text/javascript" src="https://js.api.here.com/v3/3.1/mapsjs-mapevents.js"></script>
+<script type="text/javascript" src='../js-examples-rendering-helpers/iframe-height.js'></script></head>
     <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
     <!--[if lt IE 9]>
       <script type="text/javascript" src="https://html5shim.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
-    <script src="https://js.api.here.com/v3/3.1/mapsjs-core.js" type="text/javascript" charset="utf-8"></script>
-    <script src="https://js.api.here.com/v3/3.1/mapsjs-service.js"type="text/javascript" charset="utf-8"></script>
   </head>
   <body>
     <div class='navbar navbar-default navbar-static-top'>
@@ -89,25 +93,7 @@
           <div class='alert alert-info' id='result_box' ><strong id='result_count'></strong></div>
         </div>
         <div class='col-md-8'>
-          <div style="width: 640px; height: 480px" id="mapContainer"></div>
-          <script>
-          // Initialize the platform object:
-          var platform = new H.service.Platform({
-          'apikey': '{D8lrvcszPIH1OEniZ7Vt0pNdOZ2dNC5_m72Ix8svE58}'
-          });
-
-          // Obtain the default map types from the platform object
-          var maptypes = platform.createDefaultLayers();
-
-          // Instantiate (and display) a map object:
-          var map = new H.Map(
-          document.getElementById('mapContainer'),
-          maptypes.vector.normal.map,
-          {
-            zoom: 10,
-            center: { lng: 13.4, lat: 52.51 }
-          });
-        </script>
+          <script type="text/javascript" src='demo.js'></script>
           <noscript>
             <div class='alert alert-info'>
               <h4>Your JavaScript is disabled</h4>
