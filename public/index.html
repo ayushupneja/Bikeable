@@ -13,6 +13,8 @@
     <!--[if lt IE 9]>
       <script type="text/javascript" src="https://html5shim.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
+    <script src="https://js.api.here.com/v3/3.1/mapsjs-core.js" type="text/javascript" charset="utf-8"></script>
+    <script src="https://js.api.here.com/v3/3.1/mapsjs-service.js"type="text/javascript" charset="utf-8"></script>
   </head>
   <body>
     <div class='navbar navbar-default navbar-static-top'>
@@ -87,6 +89,25 @@
           <div class='alert alert-info' id='result_box' ><strong id='result_count'></strong></div>
         </div>
         <div class='col-md-8'>
+          <div style="width: 640px; height: 480px" id="mapContainer"></div>
+          <script>
+          // Initialize the platform object:
+          var platform = new H.service.Platform({
+          'apikey': '{D8lrvcszPIH1OEniZ7Vt0pNdOZ2dNC5_m72Ix8svE58}'
+          });
+
+          // Obtain the default map types from the platform object
+          var maptypes = platform.createDefaultLayers();
+
+          // Instantiate (and display) a map object:
+          var map = new H.Map(
+          document.getElementById('mapContainer'),
+          maptypes.vector.normal.map,
+          {
+            zoom: 10,
+            center: { lng: 13.4, lat: 52.51 }
+          });
+        </script>
           <noscript>
             <div class='alert alert-info'>
               <h4>Your JavaScript is disabled</h4>
@@ -104,7 +125,6 @@
     <script type="text/javascript" src="js/jquery-1.12.4.min.js"></script>
     <script type="text/javascript" src="js/jquery.address.js"></script>
     <script type="text/javascript" src="js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="https://maps.google.com/maps/api/js?libraries=places&key=AIzaSyAXU-NQ4vA2RHiz2x3L7tO6Ay3fbgT0-90"></script>
     <script type="text/javascript" src="js/maps_lib.js"></script>
     <script type='text/javascript'>
       //<![CDATA[
