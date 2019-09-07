@@ -25,7 +25,6 @@
   <!--<link href="http://developer.here.com/html/css/main.css" rel="stylesheet" />-->
 </head>
 <body>
-  <input id="searchTextField" type="text" size="50">
   <div class='navbar navbar-default navbar-static-top'>
     <div class='container-fluid'>
       <div class="navbar-header">
@@ -67,13 +66,13 @@
             <i class='glyphicon glyphicon-search'></i>
             Search
           </a>
-          <a class='btn btn-default' id='reset' href='#'>
+          <a class='btn btn-default' id='reset' onclick='document.getElementById("search_address").value=""; document.getElementById("search_address2").value=""' href='#'>
             <i class='glyphicon glyphicon-repeat'></i>
             Reset
           </a>
         </div>
       </div>
-  <div id="mapContainer" style="width:540px; height:334px;"></div>
+  <div id="mapContainer" style="width:1250px; height:800px; float:right"; ></div>
 <script id="example-code" data-categories="positioning" type="text/javascript" >
 //<![CDATA[
 function locateUser(map) {
@@ -91,7 +90,7 @@ function locateUser(map) {
       // Something went wrong we were unable to retrieve the GPS location
       function (error) {
         var errorMsg = 'Location could not be determined: ',
-          errors = ['PERMISSION_DENIED', 'POSITION_UNAVAILABLE', 'TIMEOUT'];
+          errors = ['POSITION_UNAVAILABLE', 'TIMEOUT'];
         if (error.code < 4) {
           errorMsg += errors[error - 1];
         } else {
@@ -109,7 +108,7 @@ function locateUser(map) {
 <script type="text/javascript" src="../js/jquery-1.12.4.min.js"></script>
 <script type="text/javascript" src="../js/jquery.address.js"></script>
 <script type="text/javascript" src="../js/bootstrap.min.js"></script>
-<script type="text/javascript" src="../js/maps_lib.js"></script>\
+<script type="text/javascript" src="../js/maps_lib.js"></script>
 <script type='text/javascript'>
   //<![CDATA[
     $(window).resize(function () {
@@ -144,13 +143,10 @@ function locateUser(map) {
       });
 
       $('#find_me').click(function(){
-        myMap.findMe();
-        return false;
+        locateUser(map);
       });
 
       $('#reset').click(function(){
-        myMap.reset();
-        return false;
       });
 
       $(":text").keydown(function(e){
@@ -187,6 +183,5 @@ function alert() {
 </script>
 
 <script>
-function dir=""
 </body>
 </html>
