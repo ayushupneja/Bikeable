@@ -29,7 +29,7 @@ GEOCODING_KEY = AIzaSyAjYIJDSpRo90YUDZNtLnSCTmuMHfLMAlo
 
 @app.route('/')
 def index():
-    return render_template('index.html')
+    return render_template('bikeable.html')
 '''
 @app.route('/routing/')
 def routing():
