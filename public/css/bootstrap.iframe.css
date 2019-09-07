@@ -85,6 +85,7 @@ sub {
 }
 img {
   border: 0;
+  vertical-align: middle;
 }
 svg:not(:root) {
   overflow: hidden;
@@ -3737,6 +3738,7 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
   padding: 15px 15px;
   font-size: 18px;
   line-height: 20px;
+  vertical-align: middle;
   height: 50px;
 }
 .navbar-brand:hover,
