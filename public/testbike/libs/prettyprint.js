@@ -37,9 +37,6 @@
         ctx.body.appendChild(codeStyleNode);
       });
     }
-    if ($('#src').length === 0) {
-      $('body').append('<div id="src"><br/><p>Code:</p></div>');
-    }
     functionsArr = functions.split(',');
     $.each(functionsArr, function (index, value) {
       var functionToDisplay = exports[value],
