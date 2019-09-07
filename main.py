@@ -23,8 +23,7 @@ app = Flask(__name__)
 
 @app.route('/')
 def index():
-    """Return a friendly HTTP greeting."""
-    return render_template('index.html')
+    return render_template('index2.html')
 
 if __name__ == '__main__':
     # This is used when running locally only. When deploying to Google App
