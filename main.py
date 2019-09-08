@@ -67,12 +67,25 @@ def routing():
         resp_legs = resp_json['response']['route'][0]['leg'][0]['maneuver']
 
         route = []
-        # Get the origin and destination
+        directions = []
+
+        # Distance is in meters and time is in seconds
+        stats = {
+            'distance': resp_json['response']['route'][0]['summary']['distance'],
+            'time': resp_json['response']['route'][0]['summary']['travelTime']
+                }
+                
+        # Get the origin, intermediate waypoints, and destination
         route.append([resp_waypoints[0]['mappedPosition']['latitude'], resp_waypoints[0]['mappedPosition']['longitude']])
+        directions.append("Start at " + origin)
         for leg in resp_legs:
             route.append([leg['position']['latitude'], leg['position']['longitude']])
+            directions.append(leg['instruction'])
         route.append([resp_waypoints[1]['mappedPosition']['latitude'], resp_waypoints[1]['mappedPosition']['longitude']])
-        return jsonify(route)
+        directions.append("Arrive at " + dest)
+
+        j_output = {'route': route, 'directions': directions, 'stats': stats}
+        return jsonify(j_output)
 
     else:
         return "<h3>GET request missing either origin or destination or has improper coordinate formatting<h3>"
