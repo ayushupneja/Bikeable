@@ -220,7 +220,7 @@
 
     request.send();
     request.onload = function () {
-      var data4 = JSON.parse(request.response);
+      var data4 = request.response;
       console.log(data4);
     };
   }
