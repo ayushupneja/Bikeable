@@ -39,7 +39,7 @@ def index():
 def theft():
     return render_template('bikeTheft.html')
 
-@app.route('/about.html')
+@app.route('/heatmaps.html')
 def about():
     response = render_template('about.html')
     return response
