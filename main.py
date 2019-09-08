@@ -41,7 +41,7 @@ def theft():
 
 @app.route('/heatmaps.html')
 def about():
-    response = render_template('about.html')
+    response = render_template('heatmaps.html')
     return response
 
 @app.route('/routing/')
