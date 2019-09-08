@@ -54,6 +54,43 @@
             width: 67%;
             height: 100%;
             position: fixed;
+            .slidecontainer {
+      width: 100%;
+    }
+
+    .slider {
+      -webkit-appearance: none;
+      width: 100%;
+      height: 10px;
+      border-radius: 5px;
+      background: #d3d3d3;
+      outline: none;
+      opacity: 0.7;
+      -webkit-transition: .2s;
+      transition: opacity .2s;
+    }
+
+    .slider:hover {
+      opacity: 1;
+    }
+
+    .slider::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 23px;
+      height: 24px;
+      border: 0;
+      background: url('/static/images/wheel.png');
+      cursor: pointer;
+    }
+
+    .slider::-moz-range-thumb {
+      width: 23px;
+      height: 24px;
+      border: 0;
+      background: url('static/images/wheel.png');
+      cursor: pointer;
+    }
         }
 
     </style>
@@ -118,20 +155,13 @@
             <input class='form-control' id='search_address2' placeholder='Enter an address or an intersection' type='text' />
           </p>
           <br />
-            <div class="d-flex justify-content-center my-4">
-              <span class="font-weight-bold purple-text mr-2 mt-1">0</span>
-              <form class="range-field w-75">
-                <input class="border-0" type="range" min="0" max="100" name="{{render_field.name}}" value="50" id="{{render_field.id_for_label}}" />
-              </form>
-              <span class="font-weight-bold purple-text ml-2 mt-1">100</span>
-            </div>
-            <div class="d-flex justify-content-center my-4">
-              <span class="font-weight-bold purple-text mr-2 mt-1">0</span>
-              <form class="range-field w-75">
-                <input class="border-0" type="range" min="0" max="100" name="{{render_field.name}}" value="50" id="{{render_field.id_for_label}}" />
-              </form>
-              <span class="font-weight-bold purple-text ml-2 mt-1">100</span>
-            </div>
+          <div class="btn-group" role="group" aria-label="Basic example">
+          <button type="button" class="btn btn-secondary">Left</button>
+          <button type="button" class="btn btn-secondary">Middle</button>
+          <button type="button" class="btn btn-secondary">Right</button>
+          </div>
+            </script>
+
           <a class='btn btn-primary' onclick="alert()" id='search' href='#'>
             <i class='glyphicon glyphicon-search'></i>
             Search
@@ -377,8 +407,7 @@
 
   <script>
   var latlngs = [
-      [39.9522, -75.1932],
-      [40.3, -76]
+    // insert the backend stuff here
   ];
   var polyline = L.polyline(latlngs, {color: 'red'}).addTo(map);
   // zoom the map to the polyline
