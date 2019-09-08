@@ -29,11 +29,9 @@
     <script src="https://use.fontawesome.com/a64989e3a8.js"></script>
 
     <!-- Grouped Layer Plugin: https://github.com/ismyrnow/leaflet-groupedlayercontrol  -->
-    <link rel="stylesheet" href="/static/js/leaflet.groupedlayercontrol.min.css">
     <script src="/static/js/leaflet.groupedlayercontrol.min.js" type="text/javascript"></script>
 
     <!-- Overview mini map Plugin: https://github.com/Norkart/Leaflet-MiniMap -->
-    <link rel="stylesheet" href="/static/js/Control.MiniMap.css">
     <script src="/static/js/Control.MiniMap.min.js" type="text/javascript"></script>
 
     <!-- Leaflet Drawing Plugin: https://github.com/codeofsumit/leaflet.pm -->
@@ -44,7 +42,6 @@
     <script src="/static/js/leaflet.wms.js"></script>
 
     <!-- Logo Credit Plugin: https://github.com/gregallensworth/L.Control.Credits -->
-    <link rel="stylesheet" href="/static/js/leaflet-control-credits.css" />
     <script type="text/javascript" src="/static/js/leaflet-control-credits.js"></script>
     <style>
         #map {
@@ -319,8 +316,6 @@
         };*/
 
         // add leaflet.pm controls to the map
-        map.pm.addControls(options);
-
         //Logo position: bottomright
         var credctrl = L.controlCredits({
             image: "Images/opengislab_106x23.png",
