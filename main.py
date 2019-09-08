@@ -15,12 +15,14 @@
 
 # [START gae_python37_app]
 from flask import Flask, render_template, request, jsonify
+from flask_cors import CORS
 import requests, json
 
 
 # If `entrypoint` is not defined in app.yaml, App Engine will look for an app
 # called `app` in `main.py`.
 app = Flask(__name__)
+CORS(app)
 
 HERE_APP_ID = "r6ekBx0XS2Vo20WiW8gN"
 HERE_APP_CODE = "w3sv0mJ_a5dthoHMZ6FgKQ"
@@ -30,12 +32,15 @@ GEOCODING_KEY = "AIzaSyAXU-NQ4vA2RHiz2x3L7tO6Ay3fbgT0-90"
 
 @app.route('/') 
 def index():
-    return render_template('bikeable.html')
-    #print("<h1>Hello, world!</h1>")
+    response = render_template('bikeable.html')
+    response.headers.add('Access-Control-Allow-Origin', '*')
+    return response
 
 @app.route('/about.html')
 def about():
-    return render_template('about.html')
+    response = render_template('about.html')
+    response.headers.add('Access-Control-Allow-Origin', '*')
+    return response
 
 @app.route('/routing/')
 def routing():
@@ -104,10 +109,13 @@ def routing():
         directions.append("Arrive at " + dest)
 
         j_output = {'route': route, 'directions': directions, 'stats': stats}
-        return jsonify(j_output)
-
+        response = jsonify(j_output)
+        response.headers.add('Access-Control-Allow-Origin', '*')
+        return response
     else:
-        return "<h3>GET request missing either origin or destination or has improper coordinate formatting<h3>"
+        response = "<h3>GET request missing either origin or destination or has improper coordinate formatting<h3>"
+        response.headers.add('Access-Control-Allow-Origin', '*')
+        return response
 
 
 if __name__ == '__main__':
