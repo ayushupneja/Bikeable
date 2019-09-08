@@ -2,9 +2,11 @@
 <html>
 
 <head>
-
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="/static/css/leaflet-routing-machine.css" />
     <!-- Load Leaflet: http://leafletjs.com/ -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.2.0/dist/leaflet.css" integrity="sha512-M2wvCLH6DSRazYeZRIm1JnYyh22purTM+FDB5CsyxtQJYeKq83arPe5wgbNmcFXGqiSH2XR8dT/fJISVA1r/zQ==" crossorigin="" />
@@ -44,13 +46,50 @@
     <!-- Logo Credit Plugin: https://github.com/gregallensworth/L.Control.Credits -->
     <script type="text/javascript" src="/static/js/leaflet-control-credits.js"></script>
     <style>
+    body {
+      background-color: black;
+    }
+    @import url(https://fonts.googleapis.com/css?family=Anonymous+Pro);
+    .line-1{
+    position: relative;
+    top: 50%;
+    width: 24em;
+    margin: 0 auto;
+    border-right: 2px solid rgba(255,255,255,.75);
+    font-size: 180%;
+    text-align: center;
+    white-space: nowrap;
+    overflow: hidden;
+    transform: translateY(-50%);
+}
+
+/* Animation */
+.anim-typewriter{
+  animation: typewriter 4s steps(44) 1s 1 normal both,
+             blinkTextCursor 500ms steps(44) infinite normal;
+}
+@keyframes typewriter{
+  from{width: 0;}
+  to{width: 24em;}
+}
+@keyframes blinkTextCursor{
+  from{border-right-color: rgba(255,255,255,1);}
+  to{border-right-color: transparent;}
+}
         #map {
             width: 67%;
-            height: 100%;
+            height: 88%;
             position: fixed;
+            bottom: 0;
             .slidecontainer {
       width: 100%;
     }
+    .bottomright {
+      position: absolute;
+      bottom: 30px;
+      right: 30px;
+      font-size: 40px;
+}
 
     .slider {
       -webkit-appearance: none;
@@ -214,6 +253,7 @@
   </script>
 
   <script>
+  var directions1 = []
   function backend(add1,add2) {
     var request = new XMLHttpRequest();
     var add3 = add1.split(' ').join('+');
@@ -222,9 +262,8 @@
     var add6 = add4.replace(/,/g,"");
     var url = "http://bikeable.tech/routing/?origin=".concat(add5,'&dest=',add6 );
     console.log(url);
-    request.open('GET', url);
+    request.open('GET', url, true);
     request.responseType= 'json';
-
     request.send();
     request.onload = function () {
       var data4 = request.response;
@@ -232,15 +271,24 @@
       var latlngs = [];
       for (i = 0; i < data4.route.length; i++) {
         latlngs.push(data4.route[i]);
+        directions1.push(data4.directions[i])
       }
+      var marker = L.marker(latlngs[0]);
+      marker.addTo(map);
+      var marker2 = L.marker(latlngs[data4.route.length-1 ]);
+      marker2.addTo(map);
       var polyline = L.polyline(latlngs, {color: 'red'}).addTo(map);
       console.log(latlngs)
       console.log(data4);
-  request.send();
+      console.log(directions1)
+      directions1 = directions1.join(" <br> ")
+      document.getElementById("modalDirect").innerHTML = directions1;
+      request.send();
   //$("#search").click(back);
 };
 }
 </script>
+
   <div class='navbar navbar-default navbar-static-top' >
     <div class='container-fluid'>
       <div class="navbar-header">
@@ -261,8 +309,8 @@
   </div>
   <div class='container-fluid'>
     <div class='row'>
+      <p class="line-1 anim-typewriter">Find the fastest, safest route for you!</p>
       <div class='col-md-4' style="float:right";>
-        <p><b>Find the fastest, safest route for you!</b></p>
         <div class='well'>
           <h4>
             Origin <small>(<a id='find_me' href='#'>find me</a>)</small>
@@ -282,27 +330,35 @@
             <i class='glyphicon glyphicon-search'></i>
             Search
           </a>
-          <a class='btn btn-default' id='reset' onclick='document.getElementById("search_address").value=""; document.getElementById("search_address2").value=""' href='#'>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class='btn btn-default' id='reset' onclick='document.getElementById("search_address").value=""; document.getElementById("search_address2").value=""' href='#'>
             <i class='glyphicon glyphicon-repeat'></i>
             Reset
           </a>
-          <br />
-          <h2> Risk Rating </h2>
-          <div class="radio-inline">
-            <label><input type="radio" name="optradio" checked>Normal</label>
-          </div>
-          <div class="radio-inline">
-            <label><input type="radio" name="optradio">Safe</label>
-          </div>
-          <div class="radio-inline">
-            <label><input type="radio" name="optradio" >Safest</label>
-          </div>
-        </br></br>
-            </script>
+          &nbsp;&nbsp;&nbsp;
+          &nbsp;<button type="button" class="btn btn-info btn-default" data-toggle="modal" data-target="#myModal">Open Directions</button>
+          <div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Biking Directions</h4>
+        </div>
+        <div class="modal-body" id = "modalDirect">
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
         </div>
       </div>
 
+    </div>
+  </div>
+          </a>
+        </div>
+      </div>
     <div id="map"></div>
+
 
     <script>
         var map = L.map('map', {
@@ -453,7 +509,6 @@
         }).addTo(map);
 
     </script>
-  </script>
 
   <!--<script>
   var add1 = document.getElementbyID("search_address").value);
@@ -474,6 +529,10 @@
   // zoom the map to the polyline
   //map.fitBounds(polyline.getBounds());
   </script>
+
+
+
+
 </body>
 
 </html>
