@@ -13,7 +13,7 @@
 # limitations under the License.
 
 # [START gae_python37_app]
-from flask import Flask, render_template, request, jsonify
+from flask import Flask, render_template, request
 import requests, json
 
 
@@ -61,8 +61,8 @@ def routing():
         route = []
         for wp in resp_waypoints:
             route.append([wp['mappedPosition']['latitude'], wp['mappedPosition']['longitude']])
-        #route_json = json.dumps(route)
-        print(jsonify(route))
+        route_json = json.dumps(route)
+        print(route_json)
             
 
     else:
