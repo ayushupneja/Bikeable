@@ -3,8 +3,6 @@
 
 <head>
 
-    <title>Leaflet Example</title>
-
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -48,7 +46,6 @@
     <!-- Logo Credit Plugin: https://github.com/gregallensworth/L.Control.Credits -->
     <link rel="stylesheet" href="/static/css/leaflet-control-credits.css" />
     <script type="text/javascript" src="/static/leafJS/leaflet-control-credits.js"></script>
-
     <style>
         #map {
             width: 67%;
@@ -118,7 +115,7 @@
 </head>
 
 <body>
-  <div class='navbar navbar-default navbar-static-top'>
+  <div class='navbar navbar-default navbar-static-top' >
     <div class='container-fluid'>
       <div class="navbar-header">
         <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -126,7 +123,7 @@
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </button>
-        <a class='navbar-brand' href='bikeable.html'><img src="static/images/BIKEABLE_LOGO.png" height="50"></a>
+        <a class='navbar-brand' href='bikeable.html'><img src="static/images/BIKEABLE_LOGO.png" height="70"></a>
       </div>
       <div class="navbar-collapse collapse">
         <ul class="nav navbar-nav navbar-right">
@@ -154,14 +151,7 @@
           <p>
             <input class='form-control' id='search_address2' placeholder='Enter an address or an intersection' type='text' />
           </p>
-          <br />
-          <div class="btn-group" role="group" aria-label="Basic example">
-          <button type="button" class="btn btn-secondary">Left</button>
-          <button type="button" class="btn btn-secondary">Middle</button>
-          <button type="button" class="btn btn-secondary">Right</button>
-          </div>
-            </script>
-
+        </br>
           <a class='btn btn-primary' onclick="alert()" id='search' href='#'>
             <i class='glyphicon glyphicon-search'></i>
             Search
@@ -170,6 +160,19 @@
             <i class='glyphicon glyphicon-repeat'></i>
             Reset
           </a>
+          <br />
+          <h2> Risk Rating </h2>
+          <div class="radio-inline">
+            <label><input type="radio" name="optradio" checked>Normal</label>
+          </div>
+          <div class="radio-inline">
+            <label><input type="radio" name="optradio">Safe</label>
+          </div>
+          <div class="radio-inline">
+            <label><input type="radio" name="optradio" >Safest</label>
+          </div>
+        </br></br>
+            </script>
         </div>
       </div>
 
@@ -177,8 +180,8 @@
 
     <script>
         var map = L.map('map', {
-            center: [21.3069, -157.8583], // Honolulu, HI
-            zoom: 16
+            center: [42.32, -71.08], // Boston, MA
+            zoom: 13
         });
 
         var defaultBase = L.tileLayer.provider('Stamen.TonerLite').addTo(map);
@@ -406,8 +409,24 @@
   </script>
 
   <script>
+  function back() {
+
+  }
+
+  <script>
+  var add1 = document.getElementbyID("search_address").value);
+  var add2 = document.getElementbyID("search_address2").value);
+  add1.replace(" ","+");
+  add2.replace(" ","+");
+  var url = "http://bikeable.tech/routing/?origin=".concat(add1,"&dest=",add2);
+  $.getJSON(url, function(data) {
+      //data is the JSON string
+  });
+  console.log(data);
+  </script>
+
+  <script>
   var latlngs = [
-    // insert the backend stuff here
   ];
   var polyline = L.polyline(latlngs, {color: 'red'}).addTo(map);
   // zoom the map to the polyline
