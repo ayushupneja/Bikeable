@@ -33,6 +33,10 @@ def index():
     return render_template('bikeable.html')
     #print("<h1>Hello, world!</h1>")
 
+@app.route('/bikeTheft.html') 
+def theft():
+    return render_template('bikeTheft.html')
+
 @app.route('/about.html')
 def about():
     return render_template('about.html')
