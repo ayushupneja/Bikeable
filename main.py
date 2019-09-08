@@ -56,12 +56,22 @@ def routing():
             "&waypoint1=" + wp_d +
             "&mode=fastest;bicycle;traffic:disabled&alternatives=3"
             )
+        print(HERE_ENDPOINT + 
+            "?app_id="   + HERE_APP_ID +
+            "&app_code=" + HERE_APP_CODE +
+            "&waypoint0=" + wp_o +
+            "&waypoint1=" + wp_d +
+            "&mode=fastest;bicycle;traffic:disabled&alternatives=3")
         resp_json = json.loads(resp.content.decode('utf-8'))
         resp_waypoints = resp_json['response']['route'][0]['waypoint']
+        resp_legs = resp_json['response']['route'][0]['leg'][0]['maneuver']
 
         route = []
-        for wp in resp_waypoints:
-            route.append([wp['mappedPosition']['latitude'], wp['mappedPosition']['longitude']])
+        # Get the origin and destination
+        route.append([resp_waypoints[0]['mappedPosition']['latitude'], resp_waypoints[0]['mappedPosition']['longitude']])
+        for leg in resp_legs:
+            route.append([leg['position']['latitude'], leg['position']['longitude']])
+        route.append([resp_waypoints[1]['mappedPosition']['latitude'], resp_waypoints[1]['mappedPosition']['longitude']])
         return jsonify(route)
 
     else:
