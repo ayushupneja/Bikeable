@@ -15,12 +15,14 @@
 
 # [START gae_python37_app]
 from flask import Flask, render_template, request, jsonify
+from flask_cors import CORS, cross_origin
 import requests, json
 
 
 # If `entrypoint` is not defined in app.yaml, App Engine will look for an app
 # called `app` in `main.py`.
 app = Flask(__name__)
+CORS(app, support_credentials=True)
 
 HERE_APP_ID = "r6ekBx0XS2Vo20WiW8gN"
 HERE_APP_CODE = "w3sv0mJ_a5dthoHMZ6FgKQ"
@@ -28,12 +30,13 @@ HERE_ENDPOINT = "https://route.api.here.com/routing/7.2/calculateroute.json"
 GEOCODING_ENDPOINT = "https://maps.googleapis.com/maps/api/geocode/json?address="
 GEOCODING_KEY = "AIzaSyAXU-NQ4vA2RHiz2x3L7tO6Ay3fbgT0-90"
 
-@app.route('/') 
+@app.route('/')
+@cross_origin(supports_credentials=True)
 def index():
     return render_template('bikeable.html')
     #print("<h1>Hello, world!</h1>")
 
-@app.route('/bikeTheft.html') 
+@app.route('/bikeTheft.html')
 def theft():
     return render_template('bikeTheft.html')
 
@@ -63,10 +66,10 @@ def routing():
             avoid_str += str(data[i][0]) + ',' + str(data[i][1]) + ';' + str(data[i][2]) + ',' + str(data[i][3])
             if i < len(data) - 1:
                 avoid_str += '!'
-        
+
 
         resp = requests.post(
-            HERE_ENDPOINT + 
+            HERE_ENDPOINT +
             "?app_id="   + HERE_APP_ID +
             "&app_code=" + HERE_APP_CODE +
             "&waypoint0=" + wp_o +
@@ -76,7 +79,7 @@ def routing():
             )
 
         print(
-            HERE_ENDPOINT + 
+            HERE_ENDPOINT +
             "?app_id="   + HERE_APP_ID +
             "&app_code=" + HERE_APP_CODE +
             "&waypoint0=" + wp_o +
