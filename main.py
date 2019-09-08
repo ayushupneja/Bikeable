@@ -42,26 +42,45 @@ def routing():
     origin = request.args.get('origin')
     dest = request.args.get('dest')
     if all([origin, dest]):
-        origin_resp = requests.get(GEOCODING_ENDPOINT + origin.replace(' ', '+') + "&key=" + GEOCODING_KEY)
-        dest_resp = requests.get(GEOCODING_ENDPOINT + dest.replace(' ', '+') + dest + "&key=" + GEOCODING_KEY)
+        origin_resp = requests.post(GEOCODING_ENDPOINT + origin.replace(' ', '+') + "&key=" + GEOCODING_KEY)
+        dest_resp = requests.post(GEOCODING_ENDPOINT + dest.replace(' ', '+') + dest + "&key=" + GEOCODING_KEY)
+
         origin_json = json.loads(origin_resp.content.decode('utf-8'))
         dest_json = json.loads(dest_resp.content.decode('utf-8'))
         wp_o = str(origin_json['results'][0]['geometry']['location']['lat']) + "," + str(origin_json['results'][0]['geometry']['location']['lng'])
         wp_d = str(dest_json['results'][0]['geometry']['location']['lat']) + "," + str(dest_json['results'][0]['geometry']['location']['lng'])
-        resp = requests.get(
+
+        with open('static/data/avoid.json') as json_file:
+            data = json.load(json_file)
+
+        avoid_str = "&avoidareas="
+
+        for i in range(len(data)):
+            avoid_str += str(data[i][0]) + ',' + str(data[i][1]) + ';' + str(data[i][2]) + ',' + str(data[i][3])
+            if i < len(data) - 1:
+                avoid_str += '!'
+        
+
+        resp = requests.post(
             HERE_ENDPOINT + 
             "?app_id="   + HERE_APP_ID +
             "&app_code=" + HERE_APP_CODE +
             "&waypoint0=" + wp_o +
             "&waypoint1=" + wp_d +
-            "&mode=fastest;bicycle;traffic:disabled&alternatives=3"
+            "&mode=fastest;bicycle;traffic:disabled&alternatives=3" +
+            avoid_str
             )
-        print(HERE_ENDPOINT + 
+
+        print(
+            HERE_ENDPOINT + 
             "?app_id="   + HERE_APP_ID +
             "&app_code=" + HERE_APP_CODE +
             "&waypoint0=" + wp_o +
             "&waypoint1=" + wp_d +
-            "&mode=fastest;bicycle;traffic:disabled&alternatives=3")
+            "&mode=fastest;bicycle;traffic:disabled&alternatives=3" +
+            avoid_str
+        )
+
         resp_json = json.loads(resp.content.decode('utf-8'))
         resp_waypoints = resp_json['response']['route'][0]['waypoint']
         resp_legs = resp_json['response']['route'][0]['leg'][0]['maneuver']
@@ -74,7 +93,7 @@ def routing():
             'distance': resp_json['response']['route'][0]['summary']['distance'],
             'time': resp_json['response']['route'][0]['summary']['travelTime']
                 }
-                
+
         # Get the origin, intermediate waypoints, and destination
         route.append([resp_waypoints[0]['mappedPosition']['latitude'], resp_waypoints[0]['mappedPosition']['longitude']])
         directions.append("Start at " + origin)
