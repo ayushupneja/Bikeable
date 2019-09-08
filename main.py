@@ -25,12 +25,12 @@ HERE_APP_ID = "r6ekBx0XS2Vo20WiW8gN"
 HERE_APP_CODE = "w3sv0mJ_a5dthoHMZ6FgKQ"
 HERE_ENDPOINT = "https://route.api.here.com/routing/7.2/calculateroute.json"
 GEOCODING_ENDPOINT = "https://maps.googleapis.com/maps/api/geocode/json?address="
-GEOCODING_KEY = AIzaSyAjYIJDSpRo90YUDZNtLnSCTmuMHfLMAlo
+GEOCODING_KEY = "AIzaSyAjYIJDSpRo90YUDZNtLnSCTmuMHfLMAlo"
 
 @app.route('/')
 def index():
-    #return render_template('bikeable.html')
-    print("<h1>Hello, world!</h1>")
+    return render_template('index21.html')
+    #print("<h1>Hello, world!</h1>")
 '''
 @app.route('/routing/')
 def routing():
