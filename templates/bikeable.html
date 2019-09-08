@@ -118,6 +118,20 @@
             <input class='form-control' id='search_address2' placeholder='Enter an address or an intersection' type='text' />
           </p>
           <br />
+            <div class="d-flex justify-content-center my-4">
+              <span class="font-weight-bold purple-text mr-2 mt-1">0</span>
+              <form class="range-field w-75">
+                <input class="border-0" type="range" min="0" max="100" name="{{render_field.name}}" value="50" id="{{render_field.id_for_label}}" />
+              </form>
+              <span class="font-weight-bold purple-text ml-2 mt-1">100</span>
+            </div>
+            <div class="d-flex justify-content-center my-4">
+              <span class="font-weight-bold purple-text mr-2 mt-1">0</span>
+              <form class="range-field w-75">
+                <input class="border-0" type="range" min="0" max="100" name="{{render_field.name}}" value="50" id="{{render_field.id_for_label}}" />
+              </form>
+              <span class="font-weight-bold purple-text ml-2 mt-1">100</span>
+            </div>
           <a class='btn btn-primary' onclick="alert()" id='search' href='#'>
             <i class='glyphicon glyphicon-search'></i>
             Search
