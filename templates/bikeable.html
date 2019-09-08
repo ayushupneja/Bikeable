@@ -5,7 +5,7 @@
 
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+    <link rel="stylesheet" href="/static/css/leaflet-routing-machine.css" />
     <!-- Load Leaflet: http://leafletjs.com/ -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.2.0/dist/leaflet.css" integrity="sha512-M2wvCLH6DSRazYeZRIm1JnYyh22purTM+FDB5CsyxtQJYeKq83arPe5wgbNmcFXGqiSH2XR8dT/fJISVA1r/zQ==" crossorigin="" />
     <script src="https://unpkg.com/leaflet@1.2.0/dist/leaflet.js" integrity="sha512-lInM/apFSqyy1o6s89K4iQUKg6ppXEgsVxT35HbzUupEVRh2Eu9Wdl4tHj7dZO0s1uvplcYGmt3498TtHq+log==" crossorigin=""></script>
@@ -112,7 +112,7 @@
 </head>
 
 <body>
-
+  <script src="/static/js/leaflet-routing-machine.js"></script>
   <script type="text/javascript" src="/static/libs/prettyprint.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   <script type = "text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
@@ -121,6 +121,13 @@
   <script type="text/javascript" src="/static/js/maps_lib.js"></script>
   <script type="text/javascript" src="/static/js/jquery.min.js"></script>
   <script type='text/javascript'>
+//  L.Routing.control({
+  //    waypoints: [
+  //        L.latLng(42.32, -71.08),
+    //      L.latLng(43, -72)
+    //  ],
+    //  routeWhileDragging: true
+  //}).addTo(map);
   $.ajaxSetup({
     type: "POST",
     data: {},
@@ -212,7 +219,7 @@
     var add3 = add1.split(' ').join('+');
     var add4 = add2.split(' ').join('+');
     var add5 = add3.replace(/,/g,"");
-    var add6 = add3.replace(/,/g,"");
+    var add6 = add4.replace(/,/g,"");
     var url = "http://bikeable.tech/routing/?origin=".concat(add5,'&dest=',add6 );
     console.log(url);
     request.open('GET', url);
@@ -221,12 +228,18 @@
     request.send();
     request.onload = function () {
       var data4 = request.response;
+      var i;
+      var latlngs = [];
+      for (i = 0; i < data4.route.length; i++) {
+        latlngs.push(data4.route[i]);
+      }
+      var polyline = L.polyline(latlngs, {color: 'red'}).addTo(map);
+      console.log(latlngs)
       console.log(data4);
-    };
-  }
   request.send();
   //$("#search").click(back);
-
+};
+}
 </script>
   <div class='navbar navbar-default navbar-static-top' >
     <div class='container-fluid'>
@@ -236,12 +249,12 @@
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </button>
-        <a class='navbar-brand' href='bikeable.html'><img src="static/images/BIKEABLE_LOGO.png" height="70"></a>
+        <a class='navbar-brand' href='bikeable.tech'><img src="static/images/BIKEABLE_LOGO.png" height="70"></a>
       </div>
       <div class="navbar-collapse collapse">
         <ul class="nav navbar-nav navbar-right">
-          <li class='active'><a href="bikeability.html">Map</a></li>
-          <li><a href="about.html">About</a></li>
+          <li class='active'><a href="bikeable.tech">Map</a></li>
+          <li><a href="bikeable.tech/about">About</a></li>
         </ul>
       </div><!--/.nav-collapse -->
     </div>
