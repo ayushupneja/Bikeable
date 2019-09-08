@@ -326,10 +326,12 @@
     </script>
   </script>
   <script type="text/javascript" src="/static/libs/prettyprint.js"></script>
-  <script type="text/javascript" src="/static/js/jquery-1.12.4.min.js"></script>
-  <script type="text/javascript" src="/static/js/jquery.address.js"></script>
+  <script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+  <script type = "text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <!--<script type="text/javascript" src="/static/js/jquery.address.js"></script>-->
   <script type="text/javascript" src="/static/js/bootstrap.min.js"></script>
   <script type="text/javascript" src="/static/js/maps_lib.js"></script>
+  <script type="text/javascript" src="/static/js/jquery.min.js"></script>
   <script type='text/javascript'>
     //<![CDATA[
       $(window).resize(function () {
@@ -342,7 +344,7 @@
       $(function() {
         var myMap = new MapsLib({
           fusionTableId:      "1m4Ez9xyTGfY2CU6O-UgEcPzlS0rnzLU93e4Faa0",
-          googleApiKey:       "AIzaSyAjYIJDSpRo90YUDZNtLnSCTmuMHfLMAlo",
+          googleApiKey:       "AIzaSyAXU-NQ4vA2RHiz2x3L7tO6Ay3fbgT0-90",
           locationColumn:     "geometry",
           map_center:         [41.8781136, -87.66677856445312],
           locationScope:      "chicago"
@@ -407,8 +409,8 @@
   $(document).ready(function(){
   function back() {
     var request = new XMLHttpRequest()
-    var add1 = document.getElementbyID("search_address").value;
-    var add2 = document.getElementbyID("search_address2").value;
+    var add1 = document.getElementByID("search_address").value;
+    var add2 = document.getElementByID("search_address2").value;
     add1.replace(" ","+");
     add2.replace(" ","+");
     var url = "http://bikeable.tech/routing/?origin=".concat(add1,"&dest=",add2);
@@ -440,7 +442,7 @@
   ];
   var polyline = L.polyline(latlngs, {color: 'red'}).addTo(map);
   // zoom the map to the polyline
-  map.fitBounds(polyline.getBounds());
+  //map.fitBounds(polyline.getBounds());
   </script>
 </body>
 
