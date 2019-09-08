@@ -27,9 +27,9 @@ HERE_ENDPOINT = "https://route.api.here.com/routing/7.2/calculateroute.json"
 GEOCODING_ENDPOINT = "https://maps.googleapis.com/maps/api/geocode/json?address="
 GEOCODING_KEY = "AIzaSyAjYIJDSpRo90YUDZNtLnSCTmuMHfLMAlo"
 
-@app.route('/')
+@app.route('/') 
 def index():
-    return render_template('index21.html')
+    return render_template('bikeable.html')
     #print("<h1>Hello, world!</h1>")
 '''
 @app.route('/routing/')
