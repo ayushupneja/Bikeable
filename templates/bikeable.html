@@ -278,6 +278,7 @@
       var marker2 = L.marker(latlngs[data4.route.length-1 ]);
       marker2.addTo(map);
       var polyline = L.polyline(latlngs, {color: 'red'}).addTo(map);
+        map.fitBounds(polyline.getBounds());
       console.log(latlngs)
       console.log(data4);
       console.log(directions1)
@@ -297,7 +298,7 @@
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </button>
-        <a class='navbar-brand' href='bikeable.tech'><img src="static/images/BIKEABLE_LOGO.png" height="70"></a>
+        <a class='navbar-brand' href='bikeable.tech'><img src="static/images/BIKEABLE_LOGO.png" height="50"></a>
       </div>
       <div class="navbar-collapse collapse">
         <ul class="nav navbar-nav navbar-right">
@@ -313,7 +314,7 @@
       <div class='col-md-4' style="float:right";>
         <div class='well'>
           <h4>
-            Origin <small>(<a id='find_me' href='#'>find me</a>)</small>
+            Origin
           </h4>
           <p>
             <input class='form-control' id="search_address" placeholder='Enter an address or an intersection' type='text' />
@@ -502,11 +503,6 @@
 
         // add leaflet.pm controls to the map
         //Logo position: bottomright
-        var credctrl = L.controlCredits({
-            image: "Images/opengislab_106x23.png",
-            link: "https://www.opengislab.com/",
-            text: "Leaflet map example by Stephanie @ <u>opengislab.com<u/>"
-        }).addTo(map);
 
     </script>
 
@@ -522,13 +518,6 @@
   console.log(data);
   </script>
 --->
-  <script>
-  var latlngs = [
-  ];
-  var polyline = L.polyline(latlngs, {color: 'red'}).addTo(map);
-  // zoom the map to the polyline
-  //map.fitBounds(polyline.getBounds());
-  </script>
 
 
 
