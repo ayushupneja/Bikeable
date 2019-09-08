@@ -112,6 +112,112 @@
 </head>
 
 <body>
+
+  <script type="text/javascript" src="/static/libs/prettyprint.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script type = "text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <!--<script type="text/javascript" src="/static/js/jquery.address.js"></script>-->
+  <script type="text/javascript" src="/static/js/bootstrap.min.js"></script>
+  <script type="text/javascript" src="/static/js/maps_lib.js"></script>
+  <script type="text/javascript" src="/static/js/jquery.min.js"></script>
+  <script type='text/javascript'>
+    //<![CDATA[
+      $(window).resize(function () {
+        var h = $(window).height(),
+          offsetTop = 105; // Calculate the top offset
+
+        $('#map_canvas').css('height', (h - offsetTop));
+      }).resize();
+
+      $(function() {
+        var myMap = new MapsLib({
+          fusionTableId:      "1m4Ez9xyTGfY2CU6O-UgEcPzlS0rnzLU93e4Faa0",
+          googleApiKey:       "AIzaSyAXU-NQ4vA2RHiz2x3L7tO6Ay3fbgT0-90",
+          locationColumn:     "geometry",
+          map_center:         [41.8781136, -87.66677856445312],
+          locationScope:      "chicago"
+        });
+        $(':checkbox').click(function(){
+          myMap.doSearch();
+        });
+
+        $(':radio').click(function(){
+          myMap.doSearch();
+        });
+
+        $('#search_radius').change(function(){
+          myMap.doSearch();
+        });
+
+        $('#search').click(function(){
+          myMap.doSearch();
+        });
+
+        $('#find_me').click(function(){
+          locateUser(map);
+        });
+
+        $('#reset').click(function(){
+        });
+
+        $(":text").keydown(function(e){
+            var key =  e.keyCode ? e.keyCode : e.which;
+            if(key === 13) {
+                $('#search').click();
+                return false;
+            }
+        });
+      });
+    //]]>
+  </script>
+  <script type='text/javascript'>
+  function initialize() {
+    var input = document.getElementById('search_address');
+    new google.maps.places.Autocomplete(input);
+  }
+  google.maps.event.addDomListener(window, 'load', initialize);
+  </script>
+
+  <script type='text/javascript'>
+  function initialize2() {
+    var input2 = document.getElementById('search_address2');
+    new google.maps.places.Autocomplete(input2);
+  }
+  google.maps.event.addDomListener(window, 'load', initialize2);
+  </script>
+
+  <script>
+  var add1
+  var add2
+  function alert() {
+    add1 = (document.getElementById("search_address").value);
+    add2 = (document.getElementById("search_address2").value);
+    backend(add1,add2);
+  }
+  </script>
+
+  <script>
+  function backend(add1,add2) {
+    var request = new XMLHttpRequest();
+    var add3 = add1.split(' ').join('+');
+    var add4 = add2.split(' ').join('+');
+    var add5 = add3.replace(/,/g,"");
+    var add6 = add3.replace(/,/g,"");
+    var url = "https://bikeable.tech/routing/?origin=".concat(add5,'&dest=',add6 );
+    console.log(url);
+    request.open('GET', url);
+    request.responseType= 'json';
+
+    request.send();
+    request.onload = function () {
+      var data4 = JSON.parse(request.response);
+      console.log(data4);
+    };
+  }
+  request.send();
+  //$("#search").click(back);
+
+</script>
   <div class='navbar navbar-default navbar-static-top' >
     <div class='container-fluid'>
       <div class="navbar-header">
@@ -149,7 +255,7 @@
             <input class='form-control' id='search_address2' placeholder='Enter an address or an intersection' type='text' />
           </p>
         </br>
-          <a class='btn btn-primary' id='search' href='#'>
+          <a class='btn btn-primary' id='search' onclick='alert()' href='#'>
             <i class='glyphicon glyphicon-search'></i>
             Search
           </a>
@@ -325,104 +431,7 @@
 
     </script>
   </script>
-  <script type="text/javascript" src="/static/libs/prettyprint.js"></script>
-  <script type="text/javascript" src="/static/js/jquery-1.12.4.min.js"></script>
-  <script type="text/javascript" src="/static/js/jquery.address.js"></script>
-  <script type="text/javascript" src="/static/js/bootstrap.min.js"></script>
-  <script type="text/javascript" src="/static/js/maps_lib.js"></script>
-  <script type='text/javascript'>
-    //<![CDATA[
-      $(window).resize(function () {
-        var h = $(window).height(),
-          offsetTop = 105; // Calculate the top offset
 
-        $('#map_canvas').css('height', (h - offsetTop));
-      }).resize();
-
-      $(function() {
-        var myMap = new MapsLib({
-          fusionTableId:      "1m4Ez9xyTGfY2CU6O-UgEcPzlS0rnzLU93e4Faa0",
-          googleApiKey:       "AIzaSyAjYIJDSpRo90YUDZNtLnSCTmuMHfLMAlo",
-          locationColumn:     "geometry",
-          map_center:         [41.8781136, -87.66677856445312],
-          locationScope:      "chicago"
-        });
-        $(':checkbox').click(function(){
-          myMap.doSearch();
-        });
-
-        $(':radio').click(function(){
-          myMap.doSearch();
-        });
-
-        $('#search_radius').change(function(){
-          myMap.doSearch();
-        });
-
-        $('#search').click(function(){
-          myMap.doSearch();
-        });
-
-        $('#find_me').click(function(){
-          locateUser(map);
-        });
-
-        $('#reset').click(function(){
-        });
-
-        $(":text").keydown(function(e){
-            var key =  e.keyCode ? e.keyCode : e.which;
-            if(key === 13) {
-                $('#search').click();
-                return false;
-            }
-        });
-      });
-    //]]>
-  </script>
-  <script type='text/javascript'>
-  function initialize() {
-    var input = document.getElementById('search_address');
-    new google.maps.places.Autocomplete(input);
-  }
-  google.maps.event.addDomListener(window, 'load', initialize);
-  </script>
-
-  <script type='text/javascript'>
-  function initialize2() {
-    var input2 = document.getElementById('search_address2');
-    new google.maps.places.Autocomplete(input2);
-  }
-  google.maps.event.addDomListener(window, 'load', initialize2);
-  </script>
-
-  <script>
-  function alert() {
-    console.log(document.getElementById("search_address").value);
-    console.log(document.getElementById("search_address2").value);
-  }
-  </script>
-
-  <script>
-  $(document).ready(function(){
-  function back() {
-    var request = new XMLHttpRequest()
-    var add1 = document.getElementbyID("search_address").value;
-    var add2 = document.getElementbyID("search_address2").value;
-    add1.replace(" ","+");
-    add2.replace(" ","+");
-    var url = "http://bikeable.tech/routing/?origin=".concat(add1,"&dest=",add2);
-    request.open('GET', url, true)
-    request.onload = function () {
-      var data = JSON.parse(this.response)
-      console.log(data)
-    }
-  }
-  $("#search").click(back);
-});
-
-
-</script>
   <!--<script>
   var add1 = document.getElementbyID("search_address").value);
   var add2 = document.getElementbyID("search_address2").value);
@@ -440,7 +449,7 @@
   ];
   var polyline = L.polyline(latlngs, {color: 'red'}).addTo(map);
   // zoom the map to the polyline
-  map.fitBounds(polyline.getBounds());
+  //map.fitBounds(polyline.getBounds());
   </script>
 </body>
 

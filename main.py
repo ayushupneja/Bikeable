@@ -30,11 +30,16 @@ HERE_ENDPOINT = "https://route.api.here.com/routing/7.2/calculateroute.json"
 GEOCODING_ENDPOINT = "https://maps.googleapis.com/maps/api/geocode/json?address="
 GEOCODING_KEY = "AIzaSyAXU-NQ4vA2RHiz2x3L7tO6Ay3fbgT0-90"
 
-@app.route('/') 
+@app.route('/')
+@cross_origin(supports_credentials=True)
 def index():
     response = render_template('bikeable.html')
     response.headers.add('Access-Control-Allow-Origin', '*')
     return response
+
+@app.route('/bikeTheft.html')
+def theft():
+    return render_template('bikeTheft.html')
 
 @app.route('/about.html')
 def about():
@@ -64,10 +69,10 @@ def routing():
             avoid_str += str(data[i][0]) + ',' + str(data[i][1]) + ';' + str(data[i][2]) + ',' + str(data[i][3])
             if i < len(data) - 1:
                 avoid_str += '!'
-        
+
 
         resp = requests.post(
-            HERE_ENDPOINT + 
+            HERE_ENDPOINT +
             "?app_id="   + HERE_APP_ID +
             "&app_code=" + HERE_APP_CODE +
             "&waypoint0=" + wp_o +
@@ -77,7 +82,7 @@ def routing():
             )
 
         print(
-            HERE_ENDPOINT + 
+            HERE_ENDPOINT +
             "?app_id="   + HERE_APP_ID +
             "&app_code=" + HERE_APP_CODE +
             "&waypoint0=" + wp_o +
