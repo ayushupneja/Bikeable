@@ -31,6 +31,11 @@ GEOCODING_KEY = "AIzaSyAjYIJDSpRo90YUDZNtLnSCTmuMHfLMAlo"
 def index():
     return render_template('bikeable.html')
     #print("<h1>Hello, world!</h1>")
+
+@app.route('/about.html')
+def about():
+    return render_template('about.html')
+
 '''
 @app.route('/routing/')
 def routing():
