@@ -31,10 +31,8 @@ GEOCODING_ENDPOINT = "https://maps.googleapis.com/maps/api/geocode/json?address=
 GEOCODING_KEY = "AIzaSyAXU-NQ4vA2RHiz2x3L7tO6Ay3fbgT0-90"
 
 @app.route('/')
-@cross_origin(supports_credentials=True)
 def index():
     response = render_template('bikeable.html')
-    response.headers.add('Access-Control-Allow-Origin', '*')
     return response
 
 @app.route('/bikeTheft.html')
@@ -44,7 +42,6 @@ def theft():
 @app.route('/about.html')
 def about():
     response = render_template('about.html')
-    response.headers.add('Access-Control-Allow-Origin', '*')
     return response
 
 @app.route('/routing/')

@@ -121,6 +121,16 @@
   <script type="text/javascript" src="/static/js/maps_lib.js"></script>
   <script type="text/javascript" src="/static/js/jquery.min.js"></script>
   <script type='text/javascript'>
+  $.ajaxSetup({
+    type: "POST",
+    data: {},
+    dataType: 'json',
+    xhrFields: {
+      withCredentials: true
+    },
+    crossDomain: true,
+    contentType: 'application/json;charset=utf-8'
+  });
     //<![CDATA[
       $(window).resize(function () {
         var h = $(window).height(),
@@ -203,7 +213,7 @@
     var add4 = add2.split(' ').join('+');
     var add5 = add3.replace(/,/g,"");
     var add6 = add3.replace(/,/g,"");
-    var url = "https://bikeable.tech/routing/?origin=".concat(add5,'&dest=',add6 );
+    var url = "http://bikeable.tech/routing/?origin=".concat(add5,'&dest=',add6 );
     console.log(url);
     request.open('GET', url);
     request.responseType= 'json';
