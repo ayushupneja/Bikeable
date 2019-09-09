@@ -1,3 +1,13 @@
+Live at: [bikeable.tech](bikeable.tech)
+
+Devpost: [https://devpost.com/software/bikeable](https://devpost.com/software/bikeable)
+
+## Developers
+
+Created by [Ayush Upneja](upneja.me), [Parker Van Roy](https://www.linkedin.com/in/parkervr/), [Catherine Lee](https://github.com/catherinelee274), and [Will Pine](https://github.com/wpine215)
+
+
+
 ## Inspiration
 
 Parker was riding his bike down Commonwealth Avenue on his way to work this summer when a car pulled out of nowhere and hit his front tire. Lucky, he wasn't hurt, he saw his life flash before his eyes in that moment and it really left an impression on him. (His bike made it out okay as well, other than a bit of tire misalignment!)
