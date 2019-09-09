@@ -3234,12 +3234,12 @@
         /* Banner */
 
         	#banner {
-        		background-attachment: scroll,							fixed;
+        		background-attachment: fixed;
         		background-color: #666;
-        		background-image: url("images/overlay.png"), url("../../images/banner.jpg");
-        		background-position: top left,						center center;
-        		background-repeat: repeat,							no-repeat;
-        		background-size: auto,							cover;
+        		background-image: url("static/images/biker.jpg");
+        		background-position: top;
+        		background-repeat: no-repeat;
+        		background-size: cover;
         		color: #fff;
         		padding: 12em 0 20em 0;
         		text-align: center;
@@ -3970,16 +3970,43 @@
 
         	}
 
+          /* Animation */
+          .anim-typewriter{
+            animation: typewriter 4s steps(44) 1s 1 normal both,
+                       blinkTextCursor 500ms steps(44) infinite normal;
+          }
+          @keyframes typewriter{
+            from{width: 0;}
+            to{width: 24em;}
+          }
+          @keyframes blinkTextCursor{
+            from{border-right-color: rgba(255,255,255,1);}
+            to{border-right-color: transparent;}
+          }
+                  #map {
+                      width: 67%;
+                      height: 88%;
+                      position: fixed;
+                      bottom: 0;
+                      .slidecontainer {
+                width: 100%;
+              }
+              .bottomright {
+                position: absolute;
+                bottom: 30px;
+                right: 30px;
+                font-size: 40px;
+          }
         </style>
       </header>
 
     <!-- Banner -->
       <section id="banner">
-        <h2>Alpha</h2>
-        <p>Another fine responsive site template freebie by HTML5 UP.</p>
+        <h2>Bikeable</h2>
+        <h3><p class="line-1 anim-typewriter">Balancing efficiency with safety.<p></h3>
         <ul class="actions special">
-          <li><a href="#" class="button primary">Sign Up</a></li>
-          <li><a href="#" class="button">Learn More</a></li>
+          <li><a href="#" class="button primary">about</a></li>
+          <li><a href="#" class="button">Map</a></li>
         </ul>
       </section>
 
