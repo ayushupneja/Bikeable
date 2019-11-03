@@ -2,6 +2,9 @@ Live at: [bikeable.tech](bikeable.tech)
 
 Devpost: [https://devpost.com/software/bikeable](https://devpost.com/software/bikeable)
 
+Top 30 at PennApps XX
+Best Data Usability Award
+
 ## Developers
 
 Created by [Ayush Upneja](upneja.me), [Parker Van Roy](https://www.linkedin.com/in/parkervr/), [Catherine Lee](https://github.com/catherinelee274), and [Will Pine](https://github.com/wpine215)
